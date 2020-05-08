@@ -10,20 +10,8 @@ module.exports.readTripData = () => {
 module.exports.createTripDataObject = () => {
     const tripData = this.readTripData();
     const formattedTripData = [];
-    // let tripObject = {
-    //     rentalId: 0,
-    //     localStart: '',
-    //     localEnd: '',
-    //     bikeId: 0,
-    //     duration: '',
-    //     startStationId: 0,
-    //     endStationId: 0,
-    //     endStationName: '',
-    //     userType: '',
-    //     gender: '',
-    //     birthYear: 0
-    // }
     
+    // This isn't working perfrectly (when data is missing/blank)
     tripData.forEach(trip => {
         const tripObject = Object.assign({}, trip.split(',')); // 7 is end station
         
@@ -33,31 +21,43 @@ module.exports.createTripDataObject = () => {
     return formattedTripData;
 }
 
-module.exports.getRiderInfo = async (stationIds, day) => {
-    // Different age groups
-    const totalRiderInfo = [];
-    const formattedTripData = this.createTripDataObject();
-    let formattedTripDataByDay;
-    const tripsByEndStationIds = []; // Holds an array of trips for each station id
-    const test = formattedTripData.slice(5, 16);
-    const currentYear = new Date().getFullYear();
-
+const getFormattedTripDataByDay = (formattedTripData, day) => {
     // Filter data by day (key = 2 (end day))
-    formattedTripDataByDay = formattedTripData.filter(formattedTrip => {
+    const formattedTripDataByDay = formattedTripData.filter(formattedTrip => {
         if (formattedTrip['2']) {
             const tripDay = formattedTrip['2'].slice(5,10)
             return tripDay === day;
         }        
     })
 
-    // Filter trips by end station Id(s) (key = 7) //TODO: CHANGE BACK
+    return formattedTripDataByDay;
+}
+
+const getTripsByStationIds = (formattedTripDataByDay, stationIds) => {
+    const tripsByEndStationIds = [];
+
+    // Filter trips by end station Id(s) (key = 7)
     stationIds.forEach(stationId => {
         const result = formattedTripDataByDay.filter(formattedTrip => {
             return formattedTrip['7'] === stationId.toString();
         })
         tripsByEndStationIds.push(result);
     })
-    // console.log(tripsByEndStationIds);
+
+    return tripsByEndStationIds;
+}
+
+module.exports.getRiderInfo = async (stationIds, day) => {
+    // Different age groups
+    const totalRiderInfo = [];
+    const formattedTripData = this.createTripDataObject();
+    let formattedTripDataByDay;
+    let tripsByEndStationIds; // Holds an array of trips for each station id
+    const test = formattedTripData.slice(5, 16);
+    const currentYear = new Date().getFullYear();
+
+    formattedTripDataByDay = getFormattedTripDataByDay(formattedTripData, day);
+    tripsByEndStationIds = getTripsByStationIds(formattedTripDataByDay, stationIds);
     
     // Get ages of each trip
     tripsByEndStationIds.forEach(tripArray => {
@@ -98,4 +98,27 @@ module.exports.getRiderInfo = async (stationIds, day) => {
     console.log(totalRiderInfo);
     
     return totalRiderInfo;
+}
+
+module.exports.getLastTwentyTrips = (stationIds, day) => {
+    const formattedTripData = this.createTripDataObject();
+    const formattedTripDataByDay = getFormattedTripDataByDay(formattedTripData, day);
+    const tripsByEndStationIds = getTripsByStationIds(formattedTripDataByDay, stationIds);
+    const lastTwentyTrips = [];
+
+    tripsByEndStationIds.forEach(tripArray => {
+        let lastTwentyIndex;
+        let tripArrayLength = tripArray.length;
+
+        // Get last 20 unless there is less than or equal to 20 trips
+        if (tripArrayLength > 20) {
+            lastTwentyIndex = tripArrayLength - 21;
+            lastTwentyTrips.push(tripArray.slice(lastTwentyIndex, tripArrayLength-1));
+        }
+        else {
+            lastTwentyTrips.push(tripArray);
+        }
+    });
+    
+    return lastTwentyTrips;
 }

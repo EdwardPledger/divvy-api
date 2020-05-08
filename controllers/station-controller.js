@@ -1,7 +1,7 @@
 const KoaRouter = require('koa-router');
 
 const { getDataSource, getStationById } = require('../util/data-source-util');
-const { getRiderInfo } = require('../util/trip-data-util');
+const { getRiderInfo, getLastTwentyTrips } = require('../util/trip-data-util');
 
 const router = KoaRouter();
 let stationData;
@@ -47,7 +47,20 @@ router.post('/get-riders/:day', async (ctx) => {
     else {
         ctx.body = { message: 'No rider info found for that date or station id(s)'};
     }
-})
+});
+
+router.post('/get-trips/:day', async (ctx) => {
+    const { stationIds } = ctx.request.body;
+    const { day } = ctx.params;
+    const tripInfo = await getLastTwentyTrips(stationIds, day);
+
+    if (tripInfo) {
+        ctx.body = tripInfo;
+    }
+    else {
+        ctx.body = { message: 'No trip info found for that dat or station id(s)'};
+    }
+});
 
 
 module.exports = router;
