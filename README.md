@@ -23,9 +23,13 @@ To test APIs:
         2.) URL: http://localhost:3000/get-riders/:day (where day is the specific day to filter on i.e. 04-01)
         3.) Create a request body like so: { "stationIds": [425, 23] }
         4.) Hit send button
-
+    3.) API to get last twenty trips for a single day, by station id(s)
+        1.) Choose POST request (because request body is used for station ids)
+        2.) URL: http://localhost:3000/get-trips/:day (where day is the specific day to filter on i.e. 04-01)
+        3.) Create a request body like so: { "stationIds": [425, 23] }
+        4.) Hit send button
+        
 Other Notes:
-*) Didn't have enough time to attempt third api (get last 20 trips for a single day) because the second api took too much time, in retrospect I should have completed this one   first as it doesn't seem as complicated as the second api
 *) I didn't get a chance to add API tokens but if I had more time I was going to implement JWT authentication
 *) Also didn't have time to create tests for the API, but I would have used Jest
 *) A lot of error handling is missing that I would have liked to had
