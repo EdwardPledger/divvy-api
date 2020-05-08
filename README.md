@@ -1,9 +1,13 @@
 Thank you for the opportunity to try this coding challenge!
 
+For some reason Github messes up this formatting of this document so if you hit raw it will be formatted correctly.
+
 To run locally:
-1.) Open terminal (command line interface i.e. Command Prompt) at folder directory
+1.) Open terminal (command line interface i.e. Command Prompt) at project directory
 2.) Type the command "node app.js"
 3.) You should see a message stating what port the server is running on
+4.) Add Divvy_Trips_2019_Q2 file to the project directory (it was too big to upload to GitHub)
+*) I included the node modules so you shouldn't have to download them
 
 To test APIs:
 *) Postman or some kind of API testing software is required (but one API can be tested on the browser)
