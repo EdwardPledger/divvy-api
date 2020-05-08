@@ -34,5 +34,5 @@ To test APIs:
         
 Other Notes:
 *) My implementation of api tokens is very crude (due to time constraint), I would have used JWT authentication with more time
-*) Didn't have time to create tests for the API, but I would have used Jest
-*) A lot of error handling is missing that I would have liked to had
+*) Didn't have time to finish testing, it's only partially implemented
+*) A lot of error handling is missing that I would have liked to have
