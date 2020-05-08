@@ -1,6 +1,6 @@
 Thank you for the opportunity to try this coding challenge!
 
-For some reason Github messes up this formatting of this document so if you hit the Raw or edit button it will be formatted correctly.
+For some reason Github messes up the formatting of this document so if you hit the Raw or edit button it will be formatted correctly.
 
 To run locally:
 1.) Clone or download project from Github.
