@@ -1,6 +1,6 @@
 Thank you for the opportunity to try this coding challenge!
 
-For some reason Github messes up this formatting of this document so if you hit raw it will be formatted correctly.
+For some reason Github messes up this formatting of this document so if you hit the Raw button it will be formatted correctly.
 
 To run locally:
 1.) Open terminal (command line interface i.e. Command Prompt) at project directory
