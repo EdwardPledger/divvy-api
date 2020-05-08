@@ -12,6 +12,6 @@ describe('/GET/:id station', () => {
         const stationMock = { "station_id":"2" }
         chai.request(server)
         .get('/get-station' + stationMock.station_id)
-        .send(stationMock)
-    })
-})
+        .send(stationMock);
+    });
+});
