@@ -5,3 +5,5 @@ const portNumber = 3000;
 
 // Start server
 const serverConfiguration = new ServerConfiguration(portNumber);
+
+module.exports.serverConfiguration = serverConfiguration;
