@@ -3,10 +3,11 @@ Thank you for the opportunity to try this coding challenge!
 For some reason Github messes up this formatting of this document so if you hit the Raw button it will be formatted correctly.
 
 To run locally:
-1.) Open terminal (command line interface i.e. Command Prompt) at project directory
-2.) Type the command "node app.js"
-3.) You should see a message stating what port the server is running on
-4.) Add Divvy_Trips_2019_Q2 file to the project directory (it was too big to upload to GitHub)
+1.) Clone or download project from Github.
+2.) Open terminal (command line interface i.e. Command Prompt) at project directory
+3.) Type the command "node app.js"
+4.) You should see a message stating what port the server is running on
+5.) Add Divvy_Trips_2019_Q2 file to the project directory (it was too big to upload to GitHub)
 *) I included the node modules so you shouldn't have to download them
 
 To test APIs:
